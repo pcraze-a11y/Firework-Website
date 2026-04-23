@@ -37,7 +37,7 @@ prisma/seed.ts                  → seeds 80 spots A1–H10
 ### First-time DB setup
 ```bash
 docker exec lms-postgres psql -U lms -c "CREATE DATABASE pinetuck;"
-cd /c/Users/Pacra/pinetuck-fireworks
+cd /c/Users/Pacra/PinetuckShow
 DATABASE_URL="postgresql://lms:lms_dev_password@localhost:5432/pinetuck" \
 DIRECT_URL="postgresql://lms:lms_dev_password@localhost:5432/pinetuck" \
   npx prisma db push
@@ -47,7 +47,7 @@ DATABASE_URL="postgresql://lms:lms_dev_password@localhost:5432/pinetuck" \
 
 ### Dev server
 ```bash
-cd /c/Users/Pacra/pinetuck-fireworks
+cd /c/Users/Pacra/PinetuckShow
 DATABASE_URL="postgresql://lms:lms_dev_password@localhost:5432/pinetuck" \
 DIRECT_URL="postgresql://lms:lms_dev_password@localhost:5432/pinetuck" \
 RESEND_API_KEY="re_placeholder" \
@@ -63,7 +63,7 @@ Admin: http://localhost:3001/admin (password: `admin`)
 The life-management-system injects `DATABASE_URL` into the shell. **Always prefix Prisma CLI commands** with the explicit env vars above, or they silently connect to the LMS database. `dotenv` does NOT override already-set shell vars.
 
 ### ⚠ Working directory
-**Always `cd /c/Users/Pacra/pinetuck-fireworks` before any npm/npx command.** The Bash tool's working directory drifts to life-management-system between sessions.
+**Always `cd /c/Users/Pacra/PinetuckShow` before any npm/npx command.** The Bash tool's working directory drifts to life-management-system between sessions.
 
 ## Critical tech stack notes (breaking changes)
 
