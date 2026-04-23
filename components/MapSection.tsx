@@ -154,12 +154,12 @@ export default function MapSection() {
 
       {/* Map area */}
       <section className="w-full bg-white py-8 px-4 md:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {loading ? (
             <div
               className="w-full rounded-xl animate-pulse"
               style={{
-                aspectRatio: "900 / 600",
+                aspectRatio: "705 / 490",
                 backgroundColor: "#e6f4ed",
               }}
               aria-label="Loading map…"
