@@ -1,6 +1,6 @@
-# PineTuck Fireworks — Tent Reservation Website
+# Pinetuck Fireworks — Tent Reservation Website
 
-Free tent spot reservations for the July 4, 2026 fireworks at PineTuck Golf Course, Rock Hill, SC. Celebrating the 250th Independence Day (Semiquincentennial).
+Free tent spot reservations for the July 4, 2026 fireworks at Pinetuck Golf Course, Rock Hill, SC. Celebrating the 250th Independence Day (Semiquincentennial).
 
 ## What this is
 

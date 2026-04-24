@@ -1,9 +1,9 @@
 @AGENTS.md
 
-# PineTuck Fireworks — Project Guide for Claude
+# Pinetuck Fireworks — Project Guide for Claude
 
 ## What this is
-A free tent-spot reservation site for the July 4, 2026 fireworks at PineTuck Golf Course, Rock Hill SC. Families click a map, fill in name + email, get a confirmation email with a one-click release link. Admin dashboard at `/admin`.
+A free tent-spot reservation site for the July 4, 2026 fireworks at Pinetuck Golf Course, Rock Hill SC. Families click a map, fill in name + email, get a confirmation email with a one-click release link. Admin dashboard at `/admin`.
 
 ## Where things live
 ```

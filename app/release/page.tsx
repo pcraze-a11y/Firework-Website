@@ -37,7 +37,7 @@ export default async function ReleasePage({ searchParams }: Props) {
       <div className="w-full max-w-lg bg-white rounded-[12px] shadow-card overflow-hidden">
         <div className="bg-brand-dark-teal px-8 py-6">
           <p className="text-white text-xl font-semibold font-sans m-0">
-            PineTuck Fireworks &middot; July 4, 2026
+            Pinetuck Fireworks &middot; July 4, 2026
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default async function ReleasePage({ searchParams }: Props) {
 
         <div className="border-t border-brand-silver px-8 py-4">
           <p className="text-center text-sm text-brand-silver m-0">
-            PineTuck Golf Course &middot; Rock Hill, SC
+            Pinetuck Golf Course &middot; Rock Hill, SC
           </p>
         </div>
       </div>

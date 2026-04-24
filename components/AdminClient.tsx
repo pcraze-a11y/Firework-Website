@@ -126,7 +126,7 @@ export default function AdminClient({ reservations: initial, totalSpots }: Props
   return (
     <div className="min-h-screen bg-[#f3f6f7]">
       <header className="bg-[#135658] px-6 py-4 flex items-center justify-between">
-        <h1 className="text-white text-xl font-semibold tracking-wide">PineTuck Admin</h1>
+        <h1 className="text-white text-xl font-semibold tracking-wide">Pinetuck Admin</h1>
         <button
           onClick={handleExportCSV}
           className="bg-[#039149] text-white text-sm font-medium rounded-[6px] px-4 py-2 hover:opacity-90 transition-opacity"
