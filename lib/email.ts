@@ -143,13 +143,16 @@ export async function sendApprovalEmail(opts: {
         <strong>Location:</strong> Pinetuck Golf Course, 2578 Tuckaway Rd, Rock Hill, SC 29730
       </p>
     </div>
-    <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 8px;">
-      Need to cancel? Click the link below to release your spot so another family can enjoy the fireworks.
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 16px;">
+      Need to cancel? Use the button below to release your spot so another family can enjoy the fireworks.
     </p>
-    <p style="margin:0 0 8px;">
-      <a href="${releaseUrl}" style="font-family:Arial,sans-serif;font-size:15px;color:#135658;font-weight:700;word-break:break-all;">
-        ${releaseUrl}
+    <div style="margin:0 0 16px;">
+      <a href="${releaseUrl}" style="display:inline-block;background-color:#135658;color:#ffffff;font-family:Arial,sans-serif;font-size:15px;font-weight:700;padding:12px 28px;border-radius:8px;text-decoration:none;">
+        Release My Spot
       </a>
+    </div>
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#888888;margin:0;word-break:break-all;">
+      Or copy this link: <a href="${releaseUrl}" style="color:#135658;">${releaseUrl}</a>
     </p>
   `)
 
