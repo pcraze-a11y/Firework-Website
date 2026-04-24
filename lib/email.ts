@@ -146,11 +146,15 @@ export async function sendApprovalEmail(opts: {
     <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 16px;">
       Need to cancel? Use the button below to release your spot so another family can enjoy the fireworks.
     </p>
-    <div style="margin:0 0 16px;">
-      <a href="${releaseUrl}" style="display:inline-block;background-color:#135658;color:#ffffff;font-family:Arial,sans-serif;font-size:15px;font-weight:700;padding:12px 28px;border-radius:8px;text-decoration:none;">
-        Release My Spot
-      </a>
-    </div>
+    <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 16px;">
+      <tr>
+        <td style="background-color:#135658;border-radius:8px;padding:12px 28px;">
+          <a href="${releaseUrl}" style="color:#ffffff;font-family:Arial,sans-serif;font-size:15px;font-weight:700;text-decoration:none;display:inline;">
+            Release My Spot
+          </a>
+        </td>
+      </tr>
+    </table>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:#888888;margin:0;word-break:break-all;">
       Or copy this link: <a href="${releaseUrl}" style="color:#135658;">${releaseUrl}</a>
     </p>
