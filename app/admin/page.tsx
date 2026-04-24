@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/db"
 import AdminClient from "@/components/AdminClient"
-import type { Reservation, Spot } from "@prisma/client"
+import type { Prisma } from "@prisma/client"
 
-export type ReservationWithSpot = Reservation & { spot: Spot }
+export type ReservationWithSpot = Prisma.ReservationGetPayload<{ include: { spot: true } }>
 
 export const dynamic = "force-dynamic"
 
