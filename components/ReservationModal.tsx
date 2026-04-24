@@ -110,6 +110,7 @@ export default function ReservationModal({
           w-full sm:max-w-md sm:mx-4 p-6 md:p-8 bg-white
           sm:rounded-xl
           rounded-t-xl rounded-b-none
+          max-h-[90vh] overflow-y-auto
         "
         style={{ boxShadow: "0 8px 48px rgba(20,52,55,0.18)" }}
       >

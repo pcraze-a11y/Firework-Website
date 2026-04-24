@@ -35,8 +35,8 @@ export default function Nav() {
         style={{ height: "40px", width: "40px", objectFit: "cover", filter: "grayscale(100%) sepia(100%) hue-rotate(200deg) saturate(500%) brightness(1.1)" }}
       />
       <div className="flex gap-1">
-        {link("/event-info", "Home")}
-        {link("/", "Reserve an Event Tent")}
+        {link("/", "Home")}
+        {link("/reserve", "Reserve an Event Tent")}
       </div>
     </nav>
   );

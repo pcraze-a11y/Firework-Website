@@ -190,7 +190,7 @@ export default function EventInfo() {
 
           <div className="flex justify-center">
             <a
-              href="/#map"
+              href="/reserve#map"
               className="inline-block font-semibold rounded px-9 py-3.5 min-h-[44px] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 no-underline"
               style={{ backgroundColor: "#BF0A30", color: "#F0F4FF", borderRadius: "6px", textDecoration: "none" }}
             >

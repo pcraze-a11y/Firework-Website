@@ -12,7 +12,7 @@ function ADMIN_EMAIL() { return process.env.ADMIN_EMAIL ?? "cacraze@gmail.com" }
 const HEADER_HTML = `
   <div style="background-color:#135658;padding:24px 32px;">
     <p style="margin:0;color:#ffffff;font-size:20px;font-weight:600;font-family:Arial,sans-serif;">
-      PineTuck Fireworks &middot; July 4, 2026
+      Pinetuck Fireworks &middot; July 4, 2026
     </p>
   </div>
 `
@@ -20,7 +20,7 @@ const HEADER_HTML = `
 const FOOTER_HTML = `
   <div style="margin-top:40px;padding:16px 32px;border-top:1px solid #c9c9c9;">
     <p style="margin:0;color:#888888;font-size:13px;font-family:Arial,sans-serif;text-align:center;">
-      PineTuck Golf Course &middot; Rock Hill, SC
+      Pinetuck Golf Course &middot; Rock Hill, SC
     </p>
   </div>
 `
@@ -87,7 +87,7 @@ export async function sendAdminNotification(opts: {
   `)
 
   const text = [
-    "New Spot Request — PineTuck Fireworks",
+    "New Spot Request — Pinetuck Fireworks",
     "",
     `Spot:    ${opts.spotId}`,
     `Family:  ${opts.familyName}`,
@@ -103,7 +103,7 @@ export async function sendAdminNotification(opts: {
   const { error } = await getResend().emails.send({
     from: FROM(),
     to: ADMIN_EMAIL(),
-    subject: `[PineTuck] New spot request: ${opts.spotId} — ${opts.familyName}`,
+    subject: `[Pinetuck] New spot request: ${opts.spotId} — ${opts.familyName}`,
     html,
     text,
   })
@@ -132,7 +132,7 @@ export async function sendApprovalEmail(opts: {
     </p>
     <p style="font-family:Arial,sans-serif;font-size:16px;color:#143437;margin:0 0 24px;line-height:1.6;">
       Great news &mdash; your request for Tent Spot <strong>${escapeHtml(opts.spotId)}</strong> has been
-      <strong style="color:#039149;">approved</strong> for the July 4th fireworks at PineTuck Golf Course.
+      <strong style="color:#039149;">approved</strong> for the July 4th fireworks at Pinetuck Golf Course.
     </p>
     <div style="background-color:#e6f4ed;border-radius:12px;padding:20px 24px;margin:0 0 24px;">
       <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 8px;font-weight:600;">Event Details</p>
@@ -140,7 +140,7 @@ export async function sendApprovalEmail(opts: {
         <strong>Date:</strong> Friday, July 4, 2026
       </p>
       <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0;">
-        <strong>Location:</strong> {{PLACEHOLDER: address}}
+        <strong>Location:</strong> Pinetuck Golf Course, 2578 Tuckaway Rd, Rock Hill, SC 29730
       </p>
     </div>
     <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 8px;">
@@ -156,7 +156,7 @@ export async function sendApprovalEmail(opts: {
   const text = [
     `Hi ${opts.familyName},`,
     "",
-    `Your request for Tent Spot ${opts.spotId} has been approved! See you July 4th at PineTuck Golf Course.`,
+    `Your request for Tent Spot ${opts.spotId} has been approved! See you July 4th at Pinetuck Golf Course.`,
     "",
     `To release your spot if you can no longer make it: ${releaseUrl}`,
   ].join("\n")
@@ -164,7 +164,7 @@ export async function sendApprovalEmail(opts: {
   const { error } = await getResend().emails.send({
     from: FROM(),
     to: opts.email,
-    subject: "Your PineTuck Tent Spot Request Has Been Approved!",
+    subject: "Your Pinetuck Tent Spot Request Has Been Approved!",
     html,
     text,
   })
@@ -193,7 +193,7 @@ export async function sendDenialEmail(opts: {
       at this time.
     </p>
     <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0;">
-      If you have questions, please reach out to the event organizer. We hope to see you at a future PineTuck event!
+      If you have questions, please reach out to the event organizer. We hope to see you at a future Pinetuck event!
     </p>
   `)
 
@@ -202,13 +202,13 @@ export async function sendDenialEmail(opts: {
     "",
     `Unfortunately your request for Tent Spot ${opts.spotId} was not approved at this time.`,
     "",
-    "If you have questions, please reach out to the event organizer. We hope to see you at a future PineTuck event!",
+    "If you have questions, please reach out to the event organizer. We hope to see you at a future Pinetuck event!",
   ].join("\n")
 
   const { error } = await getResend().emails.send({
     from: FROM(),
     to: opts.email,
-    subject: "Update on Your PineTuck Tent Spot Request",
+    subject: "Update on Your Pinetuck Tent Spot Request",
     html,
     text,
   })
@@ -236,7 +236,7 @@ export async function sendReleasedConfirmation(opts: {
       Spot <strong>${escapeHtml(opts.spotId)}</strong> has been released and is now available for another family.
     </p>
     <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0;">
-      We hope to see you at a future PineTuck event. Happy 4th of July!
+      We hope to see you at a future Pinetuck event. Happy 4th of July!
     </p>
   `)
 
@@ -245,13 +245,13 @@ export async function sendReleasedConfirmation(opts: {
     "",
     `Spot ${opts.spotId} has been released and is now available for another family.`,
     "",
-    "We hope to see you at a future PineTuck event. Happy 4th of July!",
+    "We hope to see you at a future Pinetuck event. Happy 4th of July!",
   ].join("\n")
 
   const { error } = await getResend().emails.send({
     from: FROM(),
     to: opts.email,
-    subject: "Your PineTuck Tent Spot Has Been Released",
+    subject: "Your Pinetuck Tent Spot Has Been Released",
     html,
     text,
   })

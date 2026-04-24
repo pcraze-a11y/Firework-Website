@@ -4,12 +4,12 @@ import Script from "next/script";
 import Nav from "@/components/Nav";
 
 export const metadata: Metadata = {
-  title: "PineTuck Fireworks — July 4th Tent Reservations",
+  title: "Pinetuck Fireworks — America's 250th, July 4th 2026",
   description:
-    "Reserve your free tent spot for the July 4th fireworks at PineTuck Golf Course in Rock Hill, SC. Celebrating 250 years of independence.",
+    "A free, family-oriented July 4th pyromusical at Pinetuck Golf Course in Rock Hill, SC. The largest pyromusical in the Carolinas.",
   openGraph: {
-    title: "PineTuck Fireworks — July 4th Tent Reservations",
-    description: "Reserve your free tent spot at PineTuck Golf Course, Rock Hill, SC.",
+    title: "Pinetuck Fireworks — America's 250th, July 4th 2026",
+    description: "A free July 4th pyromusical at Pinetuck Golf Course, Rock Hill, SC.",
     type: "website",
   },
 };
