@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { prisma } from "@/lib/db"
+import { sendReleasedConfirmation } from "@/lib/email"
 
 interface Props {
   searchParams: Promise<{ token?: string }>
@@ -11,21 +13,22 @@ export default async function ReleasePage({ searchParams }: Props) {
   let spotId: string | null = null
 
   if (token) {
-    const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
     try {
-      const res = await fetch(`${base}/api/release`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
-        cache: "no-store",
+      const reservation = await prisma.reservation.findUnique({
+        where: { releaseToken: token },
       })
-      if (res.ok) {
-        const data = (await res.json()) as { released: boolean; spotId: string }
-        released = data.released
-        spotId = data.spotId ?? null
+      if (reservation) {
+        await prisma.reservation.delete({ where: { id: reservation.id } })
+        released = true
+        spotId = reservation.spotId
+        sendReleasedConfirmation({
+          email: reservation.email,
+          familyName: reservation.familyName,
+          spotId: reservation.spotId,
+        }).catch(() => {})
       }
     } catch {
-      // network error — released stays false
+      // DB error — released stays false
     }
   }
 
