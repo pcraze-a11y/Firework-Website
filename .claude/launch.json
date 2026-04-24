@@ -6,6 +6,7 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "3001"],
       "port": 3001,
+      "autoPort": false,
       "env": {
         "DATABASE_URL": "postgresql://lms:lms_dev_password@localhost:5432/pinetuck",
         "DIRECT_URL": "postgresql://lms:lms_dev_password@localhost:5432/pinetuck",

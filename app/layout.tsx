@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Script from "next/script";
+import Nav from "@/components/Nav";
 
 export const metadata: Metadata = {
   title: "PineTuck Fireworks — July 4th Tent Reservations",
@@ -19,7 +21,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen">{children}</body>
+      <head>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+      </head>
+      <body className="antialiased min-h-screen">
+        <Nav />
+        {children}
+        <Script src="/js/bootstrap.min.js" strategy="afterInteractive" />
+      </body>
     </html>
   );
 }

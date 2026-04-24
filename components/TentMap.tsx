@@ -4,7 +4,7 @@ interface Spot {
   id: string;
   row: string;
   col: number;
-  reservation?: { familyName: string } | null;
+  reservation?: { familyName: string; status: string } | null;
 }
 
 interface TentMapProps {
@@ -71,23 +71,30 @@ export default function TentMap({ spots, selectedSpotId, onSpotClick }: TentMapP
       {/* Tent spots — positioned at pixel-exact centers from image analysis */}
       {SPOT_LAYOUT.map(({ id, cx, cy }) => {
         const spot = spotMap.get(id);
-        const isReserved = Boolean(spot?.reservation);
-        const isSelected = selectedSpotId === id;
+        const isPending = spot?.reservation?.status === "pending";
+        const isConfirmed = spot?.reservation?.status === "confirmed";
+        const isTaken = isPending || isConfirmed;
+        const isSelected = selectedSpotId === id && !isTaken;
 
         let fill: string;
         let stroke: string;
         let strokeWidth: number;
         let fillOpacity: number;
 
-        if (isSelected) {
-          fill = "#fff4df";
-          stroke = "#ff9a83";
-          strokeWidth = 2;
+        if (isPending) {
+          fill = "#fef9c3";
+          stroke = "#ca8a04";
+          strokeWidth = 1.5;
           fillOpacity = 1;
-        } else if (isReserved) {
+        } else if (isConfirmed) {
           fill = "#d1d5db";
           stroke = "#9ca3af";
           strokeWidth = 1.5;
+          fillOpacity = 1;
+        } else if (isSelected) {
+          fill = "#dbeafe";
+          stroke = "#3b82f6";
+          strokeWidth = 2;
           fillOpacity = 1;
         } else {
           fill = "#e6f4ed";
@@ -96,19 +103,21 @@ export default function TentMap({ spots, selectedSpotId, onSpotClick }: TentMapP
           fillOpacity = 1;
         }
 
-        const cursor = isReserved ? "not-allowed" : "pointer";
+        const cursor = isTaken ? "not-allowed" : "pointer";
 
         let ariaLabel: string;
-        if (isSelected) {
-          ariaLabel = `Spot ${id}, selected`;
-        } else if (isReserved && spot?.reservation) {
+        if (isPending) {
+          ariaLabel = `Spot ${id}, pending review`;
+        } else if (isConfirmed && spot?.reservation) {
           ariaLabel = `Spot ${id}, reserved by ${spot.reservation.familyName}`;
+        } else if (isSelected) {
+          ariaLabel = `Spot ${id}, selected`;
         } else {
           ariaLabel = `Spot ${id}, available`;
         }
 
         const handleClick = () => {
-          if (isReserved) return;
+          if (isTaken) return;
           onSpotClick(id);
         };
 
@@ -138,7 +147,8 @@ export default function TentMap({ spots, selectedSpotId, onSpotClick }: TentMapP
               height={SPOT_H + 8}
               fill="transparent"
             />
-            {spot?.reservation && <title>{spot.reservation.familyName}</title>}
+            {isPending && <title>Spot {id} — pending review</title>}
+            {isConfirmed && spot?.reservation && <title>{spot.reservation.familyName}</title>}
             <rect
               x={cx - SPOT_W / 2}
               y={cy - SPOT_H / 2}
@@ -152,16 +162,16 @@ export default function TentMap({ spots, selectedSpotId, onSpotClick }: TentMapP
             />
             <text
               x={cx}
-              y={isReserved && spot?.reservation ? cy - 3 : cy}
+              y={isConfirmed && spot?.reservation ? cy - 3 : cy}
               textAnchor="middle"
               dominantBaseline="middle"
               fontSize={8}
               fontWeight={700}
-              fill={isReserved ? "#4b5563" : "#135658"}
+              fill={isTaken ? "#4b5563" : "#135658"}
             >
               {id}
             </text>
-            {isReserved && spot?.reservation && (
+            {isConfirmed && spot?.reservation && (
               <text
                 x={cx}
                 y={cy + 5}
@@ -182,10 +192,10 @@ export default function TentMap({ spots, selectedSpotId, onSpotClick }: TentMapP
         <rect x={-8} y={-8} width={130} height={84} rx={6} fill="white" fillOpacity={0.88} />
         <rect x={0} y={0} width={16} height={12} rx={2} fill="#e6f4ed" fillOpacity={0.9} stroke="#039149" strokeWidth={1.5} />
         <text x={22} y={6} dominantBaseline="middle" fontSize={11} fill="#374151">Available</text>
-        <rect x={0} y={22} width={16} height={12} rx={2} fill="#d1d5db" fillOpacity={0.9} stroke="#9ca3af" strokeWidth={1.5} />
-        <text x={22} y={28} dominantBaseline="middle" fontSize={11} fill="#374151">Reserved</text>
-        <rect x={0} y={44} width={16} height={12} rx={2} fill="#fff4df" fillOpacity={0.9} stroke="#ff9a83" strokeWidth={2} />
-        <text x={22} y={50} dominantBaseline="middle" fontSize={11} fill="#374151">Your selection</text>
+        <rect x={0} y={22} width={16} height={12} rx={2} fill="#fef9c3" fillOpacity={0.9} stroke="#ca8a04" strokeWidth={1.5} />
+        <text x={22} y={28} dominantBaseline="middle" fontSize={11} fill="#374151">Pending</text>
+        <rect x={0} y={44} width={16} height={12} rx={2} fill="#d1d5db" fillOpacity={0.9} stroke="#9ca3af" strokeWidth={1.5} />
+        <text x={22} y={50} dominantBaseline="middle" fontSize={11} fill="#374151">Reserved</text>
       </g>
     </svg>
   );

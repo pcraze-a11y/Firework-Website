@@ -18,8 +18,10 @@ model Reservation {
   id           String   @id @default(cuid())
   spotId       String   @unique
   familyName   String
-  email        String   @unique
+  email        String
   phone        String?
+  purpose      String
+  status       String   @default("pending")
   releaseToken String   @unique
   createdAt    DateTime @default(now())
   spot         Spot     @relation(fields: [spotId], references: [id])

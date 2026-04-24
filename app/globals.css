@@ -5,31 +5,31 @@
   /* Typography */
   --font-sans: "Plus Jakarta Sans", Poppins, sans-serif;
 
-  /* Brand colors — derived from treecard.org */
-  --color-brand-text:         #143437;
-  --color-brand-heading:      #1f4564;
-  --color-brand-sea-green:    #039149;
-  --color-brand-lime-green:   #5bcd63;
-  --color-brand-lime-green-2: #3bb673;
-  --color-brand-medium-green: #69bc69;
-  --color-brand-dark-teal:    #135658;
-  --color-brand-darker-teal:  #105157;
-  --color-brand-cream:        #fff4df;
-  --color-brand-mint:         #e6f4ed;
-  --color-brand-smoke:        #f3f6f7;
-  --color-brand-cadet:        #49a3b3;
-  --color-brand-salmon:       #ff9a83;
-  --color-brand-seashell:     #fff1ee;
+  /* Patriotic US color palette */
+  --color-brand-text:         #0D1B4B;
+  --color-brand-heading:      #002868;
+  --color-brand-sea-green:    #BF0A30;
+  --color-brand-lime-green:   #E8394A;
+  --color-brand-lime-green-2: #D41A2E;
+  --color-brand-medium-green: #CC2233;
+  --color-brand-dark-teal:    #002868;
+  --color-brand-darker-teal:  #001F5B;
+  --color-brand-cream:        #F0F4FF;
+  --color-brand-mint:         #EEF2FF;
+  --color-brand-smoke:        #F5F7FF;
+  --color-brand-cadet:        #4B6CB7;
+  --color-brand-salmon:       #E8394A;
+  --color-brand-seashell:     #FFF0F2;
   --color-brand-silver:       #c9c9c9;
   --color-brand-error:        #b44b5d;
 
   /* Spot states */
-  --color-spot-available:     #e6f4ed;
-  --color-spot-available-border: #039149;
+  --color-spot-available:     #EEF2FF;
+  --color-spot-available-border: #002868;
   --color-spot-reserved:      #d1d5db;
   --color-spot-reserved-border: #9ca3af;
-  --color-spot-selected:      #fff4df;
-  --color-spot-selected-border: #ff9a83;
+  --color-spot-selected:      #FFF0F2;
+  --color-spot-selected-border: #BF0A30;
 
   /* Border radius */
   --radius-btn:  6px;
@@ -37,8 +37,8 @@
   --radius-spot: 4px;
 
   /* Shadows */
-  --shadow-card:  0 4px 24px rgba(20, 52, 55, 0.10);
-  --shadow-modal: 0 8px 48px rgba(20, 52, 55, 0.18);
+  --shadow-card:  0 4px 24px rgba(0, 40, 104, 0.10);
+  --shadow-modal: 0 8px 48px rgba(0, 40, 104, 0.18);
 }
 
 body {

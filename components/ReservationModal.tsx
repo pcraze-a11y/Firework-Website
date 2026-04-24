@@ -20,6 +20,7 @@ export default function ReservationModal({
   const [familyName, setFamilyName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [purpose, setPurpose] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [emailExistsError, setEmailExistsError] = useState<string | null>(null);
 
@@ -58,7 +59,7 @@ export default function ReservationModal({
       const res = await fetch("/api/reserve", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ spotId, familyName, email, phone: phone || undefined }),
+        body: JSON.stringify({ spotId, familyName, email, phone: phone || undefined, purpose }),
       });
 
       if (res.status === 201) {
@@ -93,6 +94,8 @@ export default function ReservationModal({
   const inputStyle = { borderColor: "#c9c9c9", color: "#143437", borderRadius: "6px" };
   const focusRingStyle = { "--tw-ring-color": "#039149" } as React.CSSProperties;
 
+  const canSubmit = familyName.trim() && email.trim() && purpose.trim().length >= 5;
+
   return (
     <div
       ref={overlayRef}
@@ -118,14 +121,11 @@ export default function ReservationModal({
               className="text-xl font-semibold"
               style={{ color: "#143437" }}
             >
-              Reserve a Spot
+              Reserve Tent Space {spotId}
             </h2>
-            <span
-              className="inline-block mt-2 text-sm font-medium px-3 py-1 rounded"
-              style={{ backgroundColor: "#fff4df", color: "#105157" }}
-            >
-              You selected spot {spotId}
-            </span>
+            <p className="text-sm mt-1" style={{ color: "#6b7280" }}>
+              Your request will be reviewed before confirmation.
+            </p>
           </div>
           <button
             onClick={onClose}
@@ -146,6 +146,17 @@ export default function ReservationModal({
               <line x1="15" y1="3" x2="3" y2="15" />
             </svg>
           </button>
+        </div>
+
+        {/* Tent guidelines callout */}
+        <div className="rounded-lg px-4 py-3 mb-2 text-sm" style={{ backgroundColor: "#F0F4FF", color: "#0D1B4B", borderLeft: "3px solid #BF0A30" }}>
+          <p className="font-semibold mb-1">Tent host requirements</p>
+          <ul className="space-y-0.5" style={{ color: "#143437" }}>
+            <li>Open to families and church groups only</li>
+            <li>All treats / items must be <strong>free</strong> — no selling or fundraising</li>
+            <li>Standard tent size: 10×10</li>
+            <li>Setup / teardown times provided upon confirmation</li>
+          </ul>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
@@ -235,13 +246,40 @@ export default function ReservationModal({
             />
           </div>
 
+          {/* Purpose */}
+          <div className="flex flex-col gap-1">
+            <label
+              htmlFor="modal-purpose"
+              className="text-sm font-medium"
+              style={{ color: "#143437" }}
+            >
+              How do you plan to use this spot?{" "}
+              <span aria-hidden="true" style={{ color: "#b44b5d" }}>*</span>
+            </label>
+            <textarea
+              id="modal-purpose"
+              required
+              disabled={submitting}
+              value={purpose}
+              onChange={(e) => setPurpose(e.target.value)}
+              rows={3}
+              maxLength={500}
+              className="w-full border rounded px-3 py-2.5 text-sm focus:outline-none focus:ring-2 disabled:opacity-50 resize-none"
+              style={{ ...inputStyle, ...focusRingStyle }}
+              placeholder="e.g. Smith family hosting a snow cone tent for the community"
+            />
+            <p className="text-xs text-right" style={{ color: "#6b7280" }}>
+              {purpose.length}/500
+            </p>
+          </div>
+
           <button
             type="submit"
-            disabled={submitting || !familyName.trim() || !email.trim()}
+            disabled={submitting || !canSubmit}
             className="w-full py-3 text-sm font-semibold rounded transition-opacity disabled:opacity-50"
             style={{ backgroundColor: "#039149", color: "#ffffff", borderRadius: "6px" }}
           >
-            {submitting ? "Reserving…" : "Reserve Spot"}
+            {submitting ? "Submitting…" : "Request Spot"}
           </button>
         </form>
       </div>

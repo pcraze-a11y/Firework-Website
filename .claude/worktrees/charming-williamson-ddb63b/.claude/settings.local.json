@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Pacra/PinetuckShow/**)",
+      "Read(//c/Users/Pacra/PinetuckShow/components/**)",
+      "Read(//c/Users/Pacra/PinetuckShow/app/**)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(netstat -ano)",
+      "Bash(tasklist /FI \"PID eq 31204\")"
+    ]
+  }
+}

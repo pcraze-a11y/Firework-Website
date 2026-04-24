@@ -1,13 +1,13 @@
 import { Resend } from "resend"
 
-// Lazy — Resend throws if the key is missing at instantiation time, so we
-// only construct it inside the send functions (after the early-return guard).
 function getResend(): Resend {
   return new Resend(process.env.RESEND_API_KEY!)
 }
 
 function FROM() { return process.env.EMAIL_FROM ?? "noreply@example.com" }
 function SITE_URL() { return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000" }
+
+function ADMIN_EMAIL() { return process.env.ADMIN_EMAIL ?? "cacraze@gmail.com" }
 
 const HEADER_HTML = `
   <div style="background-color:#135658;padding:24px 32px;">
@@ -45,14 +45,82 @@ function wrapEmail(body: string): string {
 </html>`
 }
 
-export async function sendReservationConfirmation(opts: {
+export async function sendAdminNotification(opts: {
+  familyName: string
+  email: string
+  phone?: string | null
+  spotId: string
+  purpose: string
+}): Promise<void> {
+  if (!process.env.RESEND_API_KEY) {
+    console.warn("[email] RESEND_API_KEY not set — skipping admin notification email")
+    return
+  }
+
+  const html = wrapEmail(`
+    <p style="font-family:Arial,sans-serif;font-size:18px;color:#143437;margin:0 0 20px;font-weight:600;">
+      New Spot Request
+    </p>
+    <div style="background-color:#e6f4ed;border-radius:12px;padding:20px 24px;margin:0 0 24px;">
+      <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 8px;">
+        <strong>Spot:</strong> ${escapeHtml(opts.spotId)}
+      </p>
+      <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 8px;">
+        <strong>Family:</strong> ${escapeHtml(opts.familyName)}
+      </p>
+      <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 8px;">
+        <strong>Email:</strong> ${escapeHtml(opts.email)}
+      </p>
+      <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 8px;">
+        <strong>Phone:</strong> ${escapeHtml(opts.phone ?? "—")}
+      </p>
+      <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 4px;">
+        <strong>Purpose / notes:</strong>
+      </p>
+      <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0;white-space:pre-wrap;">
+        ${escapeHtml(opts.purpose)}
+      </p>
+    </div>
+    <p style="font-family:Arial,sans-serif;font-size:14px;color:#555555;margin:0;">
+      Log in to the admin panel to approve or deny this request.
+    </p>
+  `)
+
+  const text = [
+    "New Spot Request — PineTuck Fireworks",
+    "",
+    `Spot:    ${opts.spotId}`,
+    `Family:  ${opts.familyName}`,
+    `Email:   ${opts.email}`,
+    `Phone:   ${opts.phone ?? "—"}`,
+    "",
+    "Purpose / notes:",
+    opts.purpose,
+    "",
+    "Log in to the admin panel to approve or deny this request.",
+  ].join("\n")
+
+  const { error } = await getResend().emails.send({
+    from: FROM(),
+    to: ADMIN_EMAIL(),
+    subject: `[PineTuck] New spot request: ${opts.spotId} — ${opts.familyName}`,
+    html,
+    text,
+  })
+
+  if (error) {
+    throw new Error(`Resend error: ${error.message}`)
+  }
+}
+
+export async function sendApprovalEmail(opts: {
   email: string
   familyName: string
   spotId: string
   releaseToken: string
 }): Promise<void> {
   if (!process.env.RESEND_API_KEY) {
-    console.warn("[email] RESEND_API_KEY not set — skipping reservation confirmation email")
+    console.warn("[email] RESEND_API_KEY not set — skipping approval email")
     return
   }
 
@@ -63,7 +131,8 @@ export async function sendReservationConfirmation(opts: {
       Hi ${escapeHtml(opts.familyName)},
     </p>
     <p style="font-family:Arial,sans-serif;font-size:16px;color:#143437;margin:0 0 24px;line-height:1.6;">
-      You&rsquo;ve reserved Tent Spot <strong>${escapeHtml(opts.spotId)}</strong> for the July 4th fireworks at PineTuck Golf Course.
+      Great news &mdash; your request for Tent Spot <strong>${escapeHtml(opts.spotId)}</strong> has been
+      <strong style="color:#039149;">approved</strong> for the July 4th fireworks at PineTuck Golf Course.
     </p>
     <div style="background-color:#e6f4ed;border-radius:12px;padding:20px 24px;margin:0 0 24px;">
       <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0 0 8px;font-weight:600;">Event Details</p>
@@ -87,15 +156,59 @@ export async function sendReservationConfirmation(opts: {
   const text = [
     `Hi ${opts.familyName},`,
     "",
-    `You've reserved Tent Spot ${opts.spotId} for the July 4th Fireworks at PineTuck Golf Course.`,
+    `Your request for Tent Spot ${opts.spotId} has been approved! See you July 4th at PineTuck Golf Course.`,
     "",
-    `To release your spot: ${releaseUrl}`,
+    `To release your spot if you can no longer make it: ${releaseUrl}`,
   ].join("\n")
 
   const { error } = await getResend().emails.send({
     from: FROM(),
     to: opts.email,
-    subject: "Your PineTuck Fireworks Tent Spot is Reserved! 🎆",
+    subject: "Your PineTuck Tent Spot Request Has Been Approved!",
+    html,
+    text,
+  })
+
+  if (error) {
+    throw new Error(`Resend error: ${error.message}`)
+  }
+}
+
+export async function sendDenialEmail(opts: {
+  email: string
+  familyName: string
+  spotId: string
+}): Promise<void> {
+  if (!process.env.RESEND_API_KEY) {
+    console.warn("[email] RESEND_API_KEY not set — skipping denial email")
+    return
+  }
+
+  const html = wrapEmail(`
+    <p style="font-family:Arial,sans-serif;font-size:18px;color:#143437;margin:0 0 20px;">
+      Hi ${escapeHtml(opts.familyName)},
+    </p>
+    <p style="font-family:Arial,sans-serif;font-size:16px;color:#143437;margin:0 0 16px;line-height:1.6;">
+      Unfortunately your request for Tent Spot <strong>${escapeHtml(opts.spotId)}</strong> was not approved
+      at this time.
+    </p>
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#143437;margin:0;">
+      If you have questions, please reach out to the event organizer. We hope to see you at a future PineTuck event!
+    </p>
+  `)
+
+  const text = [
+    `Hi ${opts.familyName},`,
+    "",
+    `Unfortunately your request for Tent Spot ${opts.spotId} was not approved at this time.`,
+    "",
+    "If you have questions, please reach out to the event organizer. We hope to see you at a future PineTuck event!",
+  ].join("\n")
+
+  const { error } = await getResend().emails.send({
+    from: FROM(),
+    to: opts.email,
+    subject: "Update on Your PineTuck Tent Spot Request",
     html,
     text,
   })

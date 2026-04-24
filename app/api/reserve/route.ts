@@ -1,12 +1,13 @@
 import { z } from "zod"
 import { prisma } from "@/lib/db"
-import { sendReservationConfirmation } from "@/lib/email"
+import { sendAdminNotification } from "@/lib/email"
 
 const ReserveSchema = z.object({
   spotId: z.string().min(1),
   familyName: z.string().min(1).max(100),
   email: z.string().email().max(200),
   phone: z.string().max(20).optional(),
+  purpose: z.string().min(5).max(500),
 })
 
 export async function POST(request: Request) {
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "validation_error", issues: parsed.error.issues }, { status: 400 })
   }
 
-  const { spotId, familyName, phone } = parsed.data
+  const { spotId, familyName, phone, purpose } = parsed.data
   const email = parsed.data.email.toLowerCase().trim()
 
   const spot = await prisma.spot.findUnique({ where: { id: spotId } })
@@ -30,19 +31,26 @@ export async function POST(request: Request) {
     return Response.json({ error: "spot_not_found" }, { status: 404 })
   }
 
+  // Check for an active (pending or confirmed) reservation under this email
+  const existingByEmail = await prisma.reservation.findFirst({
+    where: { email, status: { in: ["pending", "confirmed"] } },
+  })
+  if (existingByEmail) {
+    return Response.json(
+      { error: "email_exists", message: "This email already has an active reservation request." },
+      { status: 409 }
+    )
+  }
+
   const releaseToken = crypto.randomUUID()
 
   let reservation: { id: string; spotId: string; familyName: string; releaseToken: string }
   try {
     reservation = await prisma.reservation.create({
-      data: { spotId, familyName, email, phone, releaseToken },
+      data: { spotId, familyName, email, phone, purpose, status: "pending", releaseToken },
       select: { id: true, spotId: true, familyName: true, releaseToken: true },
     })
   } catch (err) {
-    // P2002 is Prisma's unique-constraint violation. We inspect the target fields
-    // to distinguish a race on spotId (two users booking the same spot) from a
-    // duplicate email, and return a specific error for each case so the client
-    // can give the user an actionable message.
     if (
       typeof err === "object" &&
       err !== null &&
@@ -53,13 +61,7 @@ export async function POST(request: Request) {
       const target = meta?.target ?? []
       if (target.includes("spotId")) {
         return Response.json(
-          { error: "spot_taken", message: "This spot was just taken. Please choose another." },
-          { status: 409 }
-        )
-      }
-      if (target.includes("email")) {
-        return Response.json(
-          { error: "email_exists", message: "This email already has a reservation." },
+          { error: "spot_taken", message: "This spot already has a pending or confirmed request. Please choose another." },
           { status: 409 }
         )
       }
@@ -68,7 +70,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await sendReservationConfirmation({ email, familyName, spotId, releaseToken })
+    await sendAdminNotification({ email, familyName, phone, spotId, purpose })
   } catch {
     // Email failure must not fail the reservation
   }

@@ -60,8 +60,9 @@ Add the following six variables. For each one, type the name exactly as shown in
 | `DATABASE_URL` | Supabase → Project Settings → Database → Transaction mode connection string (port 6543) |
 | `DIRECT_URL` | Supabase → Project Settings → Database → Session mode connection string (port 5432) |
 | `RESEND_API_KEY` | Resend → API Keys → your key (starts with `re_`) |
-| `EMAIL_FROM` | Your verified Resend sender address, e.g. `reservations@yourevent.com` |
-| `NEXT_PUBLIC_SITE_URL` | Your site URL, e.g. `https://pinetuck.yourdomain.com` — use the Vercel-assigned URL for now if you do not have a custom domain yet |
+| `EMAIL_FROM` | Your verified Resend sender address, e.g. `reservations@pinetucksc.com` |
+| `ADMIN_EMAIL` | The email address that receives a notification each time someone submits a reservation request |
+| `NEXT_PUBLIC_SITE_URL` | Your site URL — use `https://pinetucksc.com` once the domain is connected, or the Vercel-assigned URL before that |
 | `ADMIN_PASSWORD` | A strong password you choose — this protects the /admin page, so pick something you will not forget |
 
 After all six variables are added, go back to the **Deployments** tab and click **Deploy** (or **Redeploy** if you already deployed).
@@ -79,7 +80,7 @@ npm install -g vercel
 vercel login
 vercel link
 vercel env pull .env.local
-npx prisma migrate deploy
+npx prisma db push
 npx prisma db seed
 ```
 
@@ -89,7 +90,7 @@ What each command does:
 - `vercel login` — logs you in (opens a browser tab to confirm).
 - `vercel link` — connects this folder on your computer to your Vercel project.
 - `vercel env pull .env.local` — downloads your environment variables so the next two commands can use them.
-- `npx prisma migrate deploy` — creates the database tables.
+- `npx prisma db push` — creates the database tables from the schema.
 - `npx prisma db seed` — fills in the 80 tent spots (A1 through H10).
 
 To verify it worked: go to Supabase → **Table Editor** → **spots**. You should see 80 rows.
@@ -98,12 +99,12 @@ To verify it worked: go to Supabase → **Table Editor** → **spots**. You shou
 
 ## Part 6 — Connect a Custom Domain (optional)
 
-Skip this part if you are happy using the Vercel-assigned URL (e.g. `pinetuck-fireworks.vercel.app`).
+You own `pinetucksc.com` — use that.
 
 1. In Vercel, go to your project → **Settings** → **Domains** → **Add Domain**.
-2. Type your domain (e.g. `pinetuck.yourdomain.com`) and click **Add**.
-3. Vercel will show you a DNS record to add at your registrar. Add it and wait for propagation (usually under 30 minutes).
-4. Once Vercel shows the domain as active, go back to **Settings** → **Environment Variables** and update `NEXT_PUBLIC_SITE_URL` to your new domain.
+2. Type `pinetucksc.com` and click **Add**. Also add `www.pinetucksc.com` if you want the www version to work.
+3. Vercel will show you DNS records to add at your registrar (wherever you bought pinetucksc.com — Namecheap, GoDaddy, Cloudflare, etc.). Add them exactly as shown and wait for propagation (usually under 30 minutes).
+4. Once Vercel shows the domain as active, go back to **Settings** → **Environment Variables** and update `NEXT_PUBLIC_SITE_URL` to `https://pinetucksc.com`.
 5. Go to **Deployments** → **Redeploy** so the site picks up the updated URL.
 
 ---
@@ -142,8 +143,8 @@ Run `npx prisma generate` in the project folder on your computer, then push the 
 **Emails are not arriving**
 Check that `RESEND_API_KEY` is correctly set in Vercel (no extra spaces). Also confirm in Resend → Domains that your sending domain shows "Verified". Check the recipient's spam folder.
 
-**Migration fails with a connection error**
-Migrations cannot use the connection pooler. Make sure `DIRECT_URL` is set in Vercel env vars and that it uses port **5432**, not 6543.
+**`prisma db push` fails with a connection error**
+The push command cannot use the connection pooler. Make sure `DIRECT_URL` is set in your local `.env.local` file and that it uses port **5432**, not 6543.
 
 **The /admin page shows a 401 Unauthorized error**
 `ADMIN_PASSWORD` is either not set or was added after the last deployment. Go to Vercel → Settings → Environment Variables, confirm the value, then redeploy.

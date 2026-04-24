@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Spot {
+  id          String       @id
+  row         String
+  col         Int
+  createdAt   DateTime     @default(now())
+  reservation Reservation?
+}
+
+model Reservation {
+  id           String   @id @default(cuid())
+  spotId       String   @unique
+  familyName   String
+  email        String   @unique
+  phone        String?
+  releaseToken String   @unique
+  createdAt    DateTime @default(now())
+  spot         Spot     @relation(fields: [spotId], references: [id])
+}

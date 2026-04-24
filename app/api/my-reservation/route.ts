@@ -14,9 +14,10 @@ export async function GET(request: Request) {
 
   const email = parsed.data.toLowerCase().trim()
 
-  const reservation = await prisma.reservation.findUnique({
-    where: { email },
-    select: { id: true, spotId: true, familyName: true, createdAt: true },
+  const reservation = await prisma.reservation.findFirst({
+    where: { email, status: { in: ["pending", "confirmed"] } },
+    select: { id: true, spotId: true, familyName: true, status: true, createdAt: true },
+    orderBy: { createdAt: "desc" },
   })
 
   return Response.json({ reservation: reservation ?? null })

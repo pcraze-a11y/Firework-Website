@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"/c/Users/Pacra/Desktop/Final IS 201/Final/CSS/bootstrap.min.css\" /c/Users/Pacra/PinetuckShow/public/css/bootstrap.min.css)",
+      "Bash(cp \"/c/Users/Pacra/Desktop/Final IS 201/Final/CSS/bootstrap.min.js\" /c/Users/Pacra/PinetuckShow/public/js/bootstrap.min.js)",
+      "Bash(DATABASE_URL=\"postgresql://lms:lms_dev_password@localhost:5432/pinetuck\" DIRECT_URL=\"postgresql://lms:lms_dev_password@localhost:5432/pinetuck\" npx prisma db push)",
+      "Bash(DATABASE_URL=\"postgresql://lms:lms_dev_password@localhost:5432/pinetuck\" DIRECT_URL=\"postgresql://lms:lms_dev_password@localhost:5432/pinetuck\" npx prisma db push --force-reset)",
+      "Bash(DATABASE_URL=\"postgresql://lms:lms_dev_password@localhost:5432/pinetuck\" DIRECT_URL=\"postgresql://lms:lms_dev_password@localhost:5432/pinetuck\" RESEND_API_KEY=\"re_placeholder\" EMAIL_FROM=\"noreply@localhost\" NEXT_PUBLIC_SITE_URL=\"http://localhost:3001\" ADMIN_PASSWORD=\"admin\" npm run build)",
+      "Bash(DATABASE_URL=\"postgresql://lms:lms_dev_password@localhost:5432/pinetuck\" DIRECT_URL=\"postgresql://lms:lms_dev_password@localhost:5432/pinetuck\" RESEND_API_KEY=\"re_placeholder\" EMAIL_FROM=\"noreply@localhost\" NEXT_PUBLIC_SITE_URL=\"http://localhost:3001\" ADMIN_PASSWORD=\"admin\" ADMIN_EMAIL=\"test@test.com\" npm run build)"
+    ]
+  }
+}

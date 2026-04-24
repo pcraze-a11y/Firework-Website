@@ -2,7 +2,7 @@ import { prisma } from "@/lib/db"
 
 export async function GET() {
   const spots = await prisma.spot.findMany({
-    include: { reservation: { select: { familyName: true } } },
+    include: { reservation: { select: { familyName: true, status: true } } },
     orderBy: [{ row: "asc" }, { col: "asc" }],
   })
 
