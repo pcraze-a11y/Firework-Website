@@ -48,7 +48,8 @@ export default function EventInfo() {
           </div>
 
           {/* Shell Trajectory Chart */}
-          <div className="mt-10 w-full rounded overflow-hidden" style={{ border: "1px solid rgba(20,50,100,0.12)", backgroundColor: "#f4f7fb" }}>
+          <div className="mt-16 flex items-center gap-8">
+          <div className="rounded overflow-hidden flex-shrink-0" style={{ width: "75%", border: "1px solid rgba(20,50,100,0.12)", backgroundColor: "#f4f7fb" }}>
             <svg id="mainChart" viewBox="0 0 1060 700" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", width: "100%", height: "auto" }} fontFamily="'Barlow Condensed',sans-serif">
               <defs>
                 <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
@@ -240,9 +241,10 @@ export default function EventInfo() {
             </svg>
           </div>
 
-          <p className="mt-6 text-base text-center font-medium" style={{ color: "#0D1B4B" }}>
+          <p className="flex-1 text-base text-left font-medium" style={{ color: "#0D1B4B" }}>
             This year&rsquo;s show will include more than 2,000 shells and effects including monstrous 8 inch aerial shells!
           </p>
+          </div>
         </div>
       </div>
 
