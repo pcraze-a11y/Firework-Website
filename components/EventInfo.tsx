@@ -131,8 +131,6 @@ export default function EventInfo() {
               <text x="950" y="642" textAnchor="middle" fill="rgba(20,50,100,0.75)" fontSize="11" fontWeight="700" letterSpacing="1.5" fontFamily="'Barlow Condensed',sans-serif">BANK OF AMERICA</text>
               <text x="950" y="655" textAnchor="middle" fill="rgba(20,50,100,0.5)" fontSize="10" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">CORPORATE CENTER</text>
               <text x="950" y="666" textAnchor="middle" fill="rgba(100,60,10,0.7)" fontSize="9" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">871 FT · CHARLOTTE, NC</text>
-              <circle cx="110" cy="620" r="4" fill="#9a6e10" opacity="0.8"/>
-              <text x="112" y="638" fill="rgba(100,60,10,0.6)" fontSize="9" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">LAUNCH</text>
               {/* 1 inch */}
               <path d="M 200,620 L 200,554" fill="none" stroke="#e87070" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
               <circle cx="200" cy="554" r="14" fill="none" stroke="#e87070" strokeWidth="1.2" opacity="0.5"/>
