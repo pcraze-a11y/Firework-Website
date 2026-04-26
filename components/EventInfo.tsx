@@ -31,6 +31,221 @@ export default function EventInfo() {
         </div>
       </div>
 
+      {/* ── Sneak Peek Video ──────────────────────────────────────── */}
+      <div className="w-full py-16 md:py-24 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-center" style={{ color: "#0D1B4B" }}>
+            Sneak Peek
+          </h2>
+          <div className="w-full rounded-xl overflow-hidden" style={{ position: "relative", paddingBottom: "56.25%", height: 0, boxShadow: "0 4px 24px rgba(20,52,55,0.15)" }}>
+            <iframe
+              src="https://www.youtube.com/embed/jsx0v7Tof9M?si=_D1q9gv26yd8CyFK"
+              title="Sneak Peek"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+            />
+          </div>
+
+          {/* Shell Trajectory Chart */}
+          <div className="mt-10 w-full rounded overflow-hidden" style={{ border: "1px solid rgba(20,50,100,0.12)", backgroundColor: "#f4f7fb" }}>
+            <svg id="mainChart" viewBox="0 0 1060 700" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", width: "100%", height: "auto" }} fontFamily="'Barlow Condensed',sans-serif">
+              <defs>
+                <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#dde8f5"/>
+                  <stop offset="100%" stopColor="#eef3fa"/>
+                </linearGradient>
+                <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#c8d4e0"/>
+                  <stop offset="100%" stopColor="#b8c4d0"/>
+                </linearGradient>
+                <linearGradient id="bldgGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#2a4a80" stopOpacity="0.85"/>
+                  <stop offset="50%" stopColor="#3a6ab8" stopOpacity="0.65"/>
+                  <stop offset="100%" stopColor="#2a4a80" stopOpacity="0.85"/>
+                </linearGradient>
+                <filter id="glow1" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="glowStrong" x="-100%" y="-100%" width="300%" height="300%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="buildingGlow" x="-20%" y="-5%" width="140%" height="115%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="1060" height="700" fill="url(#skyGrad)"/>
+              <g stroke="rgba(20,50,100,0.08)" strokeWidth="1">
+                <line x1="90" y1="554" x2="1040" y2="554"/><line x1="90" y1="489" x2="1040" y2="489"/>
+                <line x1="90" y1="423" x2="1040" y2="423"/><line x1="90" y1="358" x2="1040" y2="358"/>
+                <line x1="90" y1="292" x2="1040" y2="292"/><line x1="90" y1="226" x2="1040" y2="226"/>
+                <line x1="90" y1="161" x2="1040" y2="161"/><line x1="90" y1="95"  x2="1040" y2="95"/>
+                <line x1="90" y1="49"  x2="1040" y2="49"/>
+              </g>
+              <rect x="0" y="620" width="1060" height="80" fill="url(#groundGrad)"/>
+              <line x1="0" y1="620" x2="1060" y2="620" stroke="rgba(20,50,100,0.3)" strokeWidth="1.5"/>
+              <g fill="rgba(20,50,100,0.6)" fontSize="11" fontFamily="'Barlow Condensed',sans-serif" letterSpacing="1">
+                <text x="82" y="558" textAnchor="end">100</text><text x="82" y="493" textAnchor="end">200</text>
+                <text x="82" y="427" textAnchor="end">300</text><text x="82" y="362" textAnchor="end">400</text>
+                <text x="82" y="296" textAnchor="end">500</text><text x="82" y="230" textAnchor="end">600</text>
+                <text x="82" y="165" textAnchor="end">700</text><text x="82" y="99"  textAnchor="end">800</text>
+              </g>
+              <text transform="rotate(-90,18,330)" x="0" y="0" fill="rgba(20,50,100,0.4)" fontSize="11" letterSpacing="3" textAnchor="middle" fontFamily="'Barlow Condensed',sans-serif">ALTITUDE (FEET)</text>
+              <line x1="90" y1="30" x2="90" y2="620" stroke="rgba(20,50,100,0.2)" strokeWidth="1"/>
+              <line x1="90" y1="49" x2="920" y2="49" stroke="rgba(20,50,100,0.2)" strokeWidth="1" strokeDasharray="4 6"/>
+              <text x="86" y="46" textAnchor="end" fill="rgba(20,50,100,0.6)" fontSize="10" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">871</text>
+              <g id="building" filter="url(#buildingGlow)">
+                <rect x="924" y="617" width="52" height="3" fill="none" stroke="#2a4a80" strokeWidth="1.5"/>
+                <rect x="928" y="240" width="44" height="380" fill="url(#bldgGrad)" stroke="#3a6ab0" strokeWidth="1"/>
+                <rect x="932" y="190" width="36" height="52" fill="url(#bldgGrad)" stroke="#3a6ab0" strokeWidth="1"/>
+                <rect x="935" y="155" width="30" height="37" fill="url(#bldgGrad)" stroke="#3a6ab0" strokeWidth="1"/>
+                <rect x="938" y="120" width="24" height="37" fill="url(#bldgGrad)" stroke="#3a6ab0" strokeWidth="1"/>
+                <rect x="942" y="80"  width="16" height="42" fill="url(#bldgGrad)" stroke="#4a7ac0" strokeWidth="1"/>
+                <line x1="950" y1="49" x2="950" y2="82" stroke="#2a5090" strokeWidth="2.5"/>
+                <polygon points="950,49 946,68 954,68" fill="none" stroke="#C8102E" strokeWidth="1.5"/>
+                <g stroke="rgba(20,60,140,0.15)" strokeWidth="0.5">
+                  <line x1="929" y1="260" x2="971" y2="260"/><line x1="929" y1="280" x2="971" y2="280"/>
+                  <line x1="929" y1="300" x2="971" y2="300"/><line x1="929" y1="320" x2="971" y2="320"/>
+                  <line x1="929" y1="340" x2="971" y2="340"/><line x1="929" y1="360" x2="971" y2="360"/>
+                  <line x1="929" y1="380" x2="971" y2="380"/><line x1="929" y1="400" x2="971" y2="400"/>
+                  <line x1="929" y1="420" x2="971" y2="420"/><line x1="929" y1="440" x2="971" y2="440"/>
+                  <line x1="929" y1="460" x2="971" y2="460"/><line x1="929" y1="480" x2="971" y2="480"/>
+                  <line x1="929" y1="500" x2="971" y2="500"/><line x1="929" y1="520" x2="971" y2="520"/>
+                  <line x1="929" y1="540" x2="971" y2="540"/><line x1="929" y1="560" x2="971" y2="560"/>
+                  <line x1="929" y1="580" x2="971" y2="580"/><line x1="929" y1="600" x2="971" y2="600"/>
+                  <line x1="950" y1="82" x2="950" y2="617"/>
+                </g>
+                <rect x="933" y="263" width="4" height="3" fill="rgba(30,80,180,0.25)" rx="0.5"/>
+                <rect x="940" y="283" width="4" height="3" fill="rgba(30,80,180,0.18)" rx="0.5"/>
+                <rect x="955" y="303" width="4" height="3" fill="rgba(30,80,180,0.22)" rx="0.5"/>
+                <rect x="963" y="343" width="4" height="3" fill="rgba(30,80,180,0.15)" rx="0.5"/>
+                <rect x="935" y="383" width="4" height="3" fill="rgba(30,80,180,0.20)" rx="0.5"/>
+                <rect x="960" y="423" width="4" height="3" fill="rgba(30,80,180,0.18)" rx="0.5"/>
+                <rect x="944" y="463" width="4" height="3" fill="rgba(30,80,180,0.25)" rx="0.5"/>
+                <rect x="933" y="503" width="4" height="3" fill="rgba(30,80,180,0.15)" rx="0.5"/>
+              </g>
+              <text x="950" y="642" textAnchor="middle" fill="rgba(20,50,100,0.75)" fontSize="11" fontWeight="700" letterSpacing="1.5" fontFamily="'Barlow Condensed',sans-serif">BANK OF AMERICA</text>
+              <text x="950" y="655" textAnchor="middle" fill="rgba(20,50,100,0.5)" fontSize="10" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">CORPORATE CENTER</text>
+              <text x="950" y="666" textAnchor="middle" fill="rgba(100,60,10,0.7)" fontSize="9" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">871 FT · CHARLOTTE, NC</text>
+              <circle cx="110" cy="620" r="4" fill="#9a6e10" opacity="0.8"/>
+              <text x="112" y="638" fill="rgba(100,60,10,0.6)" fontSize="9" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">LAUNCH</text>
+              {/* 1 inch */}
+              <path d="M 110,620 Q 140,500 200,554" fill="none" stroke="#e87070" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
+              <circle cx="200" cy="554" r="14" fill="none" stroke="#e87070" strokeWidth="1.2" opacity="0.5"/>
+              <circle cx="200" cy="554" r="14" fill="rgba(232,112,112,0.08)"/>
+              <g transform="translate(200,554)" filter="url(#glow1)">
+                <g stroke="#e87070" strokeWidth="1.2" fill="none" opacity="0.95">
+                  <line x1="0" y1="-9" x2="0" y2="-14"/><line x1="0" y1="9" x2="0" y2="14"/>
+                  <line x1="-9" y1="0" x2="-14" y2="0"/><line x1="9" y1="0" x2="14" y2="0"/>
+                  <line x1="-6.4" y1="-6.4" x2="-9.9" y2="-9.9"/><line x1="6.4" y1="-6.4" x2="9.9" y2="-9.9"/>
+                  <line x1="-6.4" y1="6.4" x2="-9.9" y2="9.9"/><line x1="6.4" y1="6.4" x2="9.9" y2="9.9"/>
+                </g>
+                <circle cx="0" cy="0" r="3" fill="#e87070" opacity="0.9"/>
+              </g>
+              <text x="220" y="551" fill="#e87070" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">1 in</text>
+              <text x="220" y="563" fill="rgba(232,112,112,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">100 FT · 45 FT BURST</text>
+              {/* 2 inch */}
+              <path d="M 110,620 Q 180,440 280,489" fill="none" stroke="#e8904a" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
+              <circle cx="280" cy="489" r="19" fill="none" stroke="#e8904a" strokeWidth="1.2" opacity="0.5"/>
+              <circle cx="280" cy="489" r="19" fill="rgba(232,144,74,0.08)"/>
+              <g transform="translate(280,489)" filter="url(#glow1)">
+                <g stroke="#e8904a" strokeWidth="1.3" fill="none" opacity="0.95">
+                  <line x1="0" y1="-11" x2="0" y2="-17"/><line x1="0" y1="11" x2="0" y2="17"/>
+                  <line x1="-11" y1="0" x2="-17" y2="0"/><line x1="11" y1="0" x2="17" y2="0"/>
+                  <line x1="-7.8" y1="-7.8" x2="-12" y2="-12"/><line x1="7.8" y1="-7.8" x2="12" y2="-12"/>
+                  <line x1="-7.8" y1="7.8" x2="-12" y2="12"/><line x1="7.8" y1="7.8" x2="12" y2="12"/>
+                </g>
+                <circle cx="0" cy="0" r="3.5" fill="#e8904a" opacity="0.9"/>
+              </g>
+              <text x="304" y="486" fill="#e8904a" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">2 in</text>
+              <text x="304" y="498" fill="rgba(232,144,74,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">200 FT · 90 FT BURST</text>
+              {/* 3 inch */}
+              <path d="M 110,620 Q 240,360 380,423" fill="none" stroke="#e8c84a" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
+              <circle cx="380" cy="423" r="29" fill="none" stroke="#e8c84a" strokeWidth="1.2" opacity="0.45"/>
+              <circle cx="380" cy="423" r="29" fill="rgba(232,200,74,0.07)"/>
+              <g transform="translate(380,423)" filter="url(#glow1)">
+                <g stroke="#e8c84a" strokeWidth="1.4" fill="none" opacity="0.95">
+                  <line x1="0" y1="-13" x2="0" y2="-20"/><line x1="0" y1="13" x2="0" y2="20"/>
+                  <line x1="-13" y1="0" x2="-20" y2="0"/><line x1="13" y1="0" x2="20" y2="0"/>
+                  <line x1="-9.2" y1="-9.2" x2="-14.1" y2="-14.1"/><line x1="9.2" y1="-9.2" x2="14.1" y2="-14.1"/>
+                  <line x1="-9.2" y1="9.2" x2="-14.1" y2="14.1"/><line x1="9.2" y1="9.2" x2="14.1" y2="14.1"/>
+                </g>
+                <circle cx="0" cy="0" r="4" fill="#e8c84a" opacity="0.9"/>
+              </g>
+              <text x="404" y="420" fill="#e8c84a" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">3 in</text>
+              <text x="404" y="432" fill="rgba(232,200,74,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">300 FT · 135 FT BURST</text>
+              {/* 4 inch */}
+              <path d="M 110,620 Q 300,270 490,358" fill="none" stroke="#6aaa10" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
+              <circle cx="490" cy="358" r="39" fill="none" stroke="#6aaa10" strokeWidth="1.2" opacity="0.4"/>
+              <circle cx="490" cy="358" r="39" fill="rgba(106,170,16,0.06)"/>
+              <g transform="translate(490,358)" filter="url(#glow1)">
+                <g stroke="#6aaa10" strokeWidth="1.5" fill="none" opacity="0.95">
+                  <line x1="0" y1="-15" x2="0" y2="-24"/><line x1="0" y1="15" x2="0" y2="24"/>
+                  <line x1="-15" y1="0" x2="-24" y2="0"/><line x1="15" y1="0" x2="24" y2="0"/>
+                  <line x1="-10.6" y1="-10.6" x2="-17" y2="-17"/><line x1="10.6" y1="-10.6" x2="17" y2="-17"/>
+                  <line x1="-10.6" y1="10.6" x2="-17" y2="17"/><line x1="10.6" y1="10.6" x2="17" y2="17"/>
+                </g>
+                <circle cx="0" cy="0" r="4.5" fill="#6aaa10" opacity="0.9"/>
+              </g>
+              <text x="520" y="355" fill="#6aaa10" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">4 in</text>
+              <text x="520" y="367" fill="rgba(106,170,16,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">400 FT · 180 FT BURST</text>
+              {/* 5 inch */}
+              <path d="M 110,620 Q 360,175 590,292" fill="none" stroke="#0a9a78" strokeWidth="2.2" strokeDasharray="7 5" opacity="0.9"/>
+              <circle cx="590" cy="292" r="48" fill="none" stroke="#0a9a78" strokeWidth="1.2" opacity="0.38"/>
+              <circle cx="590" cy="292" r="48" fill="rgba(10,154,120,0.06)"/>
+              <g transform="translate(590,292)" filter="url(#glowStrong)">
+                <g stroke="#0a9a78" strokeWidth="1.6" fill="none" opacity="0.95">
+                  <line x1="0" y1="-17" x2="0" y2="-27"/><line x1="0" y1="17" x2="0" y2="27"/>
+                  <line x1="-17" y1="0" x2="-27" y2="0"/><line x1="17" y1="0" x2="27" y2="0"/>
+                  <line x1="-12" y1="-12" x2="-19.1" y2="-19.1"/><line x1="12" y1="-12" x2="19.1" y2="-19.1"/>
+                  <line x1="-12" y1="12" x2="-19.1" y2="19.1"/><line x1="12" y1="12" x2="19.1" y2="19.1"/>
+                </g>
+                <circle cx="0" cy="0" r="5" fill="#0a9a78" opacity="0.9"/>
+              </g>
+              <text x="625" y="289" fill="#0a9a78" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">5 in</text>
+              <text x="625" y="301" fill="rgba(10,154,120,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">500 FT · 225 FT BURST</text>
+              {/* 6 inch */}
+              <path d="M 110,620 Q 420,90 700,226" fill="none" stroke="#4ab4e8" strokeWidth="2.2" strokeDasharray="7 5" opacity="0.9"/>
+              <circle cx="700" cy="226" r="58" fill="none" stroke="#4ab4e8" strokeWidth="1.2" opacity="0.35"/>
+              <circle cx="700" cy="226" r="58" fill="rgba(74,180,232,0.06)"/>
+              <g transform="translate(700,226)" filter="url(#glowStrong)">
+                <g stroke="#4ab4e8" strokeWidth="1.7" fill="none" opacity="0.95">
+                  <line x1="0" y1="-19" x2="0" y2="-30"/><line x1="0" y1="19" x2="0" y2="30"/>
+                  <line x1="-19" y1="0" x2="-30" y2="0"/><line x1="19" y1="0" x2="30" y2="0"/>
+                  <line x1="-13.4" y1="-13.4" x2="-21.2" y2="-21.2"/><line x1="13.4" y1="-13.4" x2="21.2" y2="-21.2"/>
+                  <line x1="-13.4" y1="13.4" x2="-21.2" y2="21.2"/><line x1="13.4" y1="13.4" x2="21.2" y2="21.2"/>
+                </g>
+                <circle cx="0" cy="0" r="5.5" fill="#4ab4e8" opacity="0.9"/>
+              </g>
+              <text x="738" y="223" fill="#4ab4e8" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">6 in</text>
+              <text x="738" y="235" fill="rgba(74,180,232,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">600 FT · 270 FT BURST</text>
+              {/* 8 inch */}
+              <path d="M 110,620 Q 490,30 820,95" fill="none" stroke="#1a3a7a" strokeWidth="2.5" strokeDasharray="9 5" opacity="0.95"/>
+              <circle cx="820" cy="95" r="77" fill="none" stroke="#1a3a7a" strokeWidth="1.3" opacity="0.3"/>
+              <circle cx="820" cy="95" r="77" fill="rgba(26,58,122,0.05)"/>
+              <g transform="translate(820,95)" filter="url(#glowStrong)">
+                <g stroke="#1a3a7a" strokeWidth="2" fill="none" opacity="0.98">
+                  <line x1="0" y1="-22" x2="0" y2="-35"/><line x1="0" y1="22" x2="0" y2="35"/>
+                  <line x1="-22" y1="0" x2="-35" y2="0"/><line x1="22" y1="0" x2="35" y2="0"/>
+                  <line x1="-15.6" y1="-15.6" x2="-24.7" y2="-24.7"/><line x1="15.6" y1="-15.6" x2="24.7" y2="-24.7"/>
+                  <line x1="-15.6" y1="15.6" x2="-24.7" y2="24.7"/><line x1="15.6" y1="15.6" x2="24.7" y2="24.7"/>
+                </g>
+                <circle cx="0" cy="0" r="6" fill="#1a3a7a" opacity="0.95"/>
+              </g>
+              <text x="820" y="44" textAnchor="middle" fill="#1a3a7a" fontSize="14" fontWeight="700" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">8 in</text>
+              <text x="820" y="56" textAnchor="middle" fill="rgba(26,58,122,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">800 FT · 360 FT BURST</text>
+            </svg>
+          </div>
+
+          <p className="mt-6 text-base text-center font-medium" style={{ color: "#0D1B4B" }}>
+            This year&rsquo;s show will include more than 2,000 shells and effects including monstrous 8 inch aerial shells!
+          </p>
+        </div>
+      </div>
+
       {/* ── Event Details Grid ─────────────────────────────────────── */}
       <div className="w-full py-16 md:py-24 px-6" style={{ backgroundColor: "#F0F4FF" }}>
         <div className="max-w-5xl mx-auto">
