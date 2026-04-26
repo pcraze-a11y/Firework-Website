@@ -34,12 +34,12 @@ export default function EventInfo() {
       {/* ── Sneak Peek Video ──────────────────────────────────────── */}
       <div className="w-full py-16 md:py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-center" style={{ color: "#0D1B4B" }}>
+          <h2 className="text-2xl md:text-3xl font-semibold mb-10 text-center" style={{ color: "#0D1B4B" }}>
             Sneak Peek
           </h2>
           <div className="w-full rounded-xl overflow-hidden" style={{ position: "relative", paddingBottom: "56.25%", height: 0, boxShadow: "0 4px 24px rgba(20,52,55,0.15)" }}>
             <iframe
-              src="https://www.youtube.com/embed/jsx0v7Tof9M?si=_D1q9gv26yd8CyFK"
+              src="https://www.youtube.com/embed/LXlV4Tm9e8k"
               title="Sneak Peek"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
@@ -48,7 +48,7 @@ export default function EventInfo() {
           </div>
 
           {/* Shell Trajectory Chart */}
-          <div className="mt-16 flex items-center gap-8">
+          <div className="mt-16 flex items-start gap-8">
           <div className="rounded overflow-hidden flex-shrink-0" style={{ width: "75%", border: "1px solid rgba(20,50,100,0.12)", backgroundColor: "#f4f7fb" }}>
             <svg id="mainChart" viewBox="0 0 1060 700" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", width: "100%", height: "auto" }} fontFamily="'Barlow Condensed',sans-serif">
               <defs>
@@ -134,7 +134,7 @@ export default function EventInfo() {
               <circle cx="110" cy="620" r="4" fill="#9a6e10" opacity="0.8"/>
               <text x="112" y="638" fill="rgba(100,60,10,0.6)" fontSize="9" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">LAUNCH</text>
               {/* 1 inch */}
-              <path d="M 110,620 Q 140,500 200,554" fill="none" stroke="#e87070" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
+              <path d="M 110,620 L 200,554" fill="none" stroke="#e87070" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
               <circle cx="200" cy="554" r="14" fill="none" stroke="#e87070" strokeWidth="1.2" opacity="0.5"/>
               <circle cx="200" cy="554" r="14" fill="rgba(232,112,112,0.08)"/>
               <g transform="translate(200,554)" filter="url(#glow1)">
@@ -149,7 +149,7 @@ export default function EventInfo() {
               <text x="220" y="551" fill="#e87070" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">1 in</text>
               <text x="220" y="563" fill="rgba(232,112,112,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">100 FT · 45 FT BURST</text>
               {/* 2 inch */}
-              <path d="M 110,620 Q 180,440 280,489" fill="none" stroke="#e8904a" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
+              <path d="M 110,620 L 280,489" fill="none" stroke="#e8904a" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
               <circle cx="280" cy="489" r="19" fill="none" stroke="#e8904a" strokeWidth="1.2" opacity="0.5"/>
               <circle cx="280" cy="489" r="19" fill="rgba(232,144,74,0.08)"/>
               <g transform="translate(280,489)" filter="url(#glow1)">
@@ -164,7 +164,7 @@ export default function EventInfo() {
               <text x="304" y="486" fill="#e8904a" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">2 in</text>
               <text x="304" y="498" fill="rgba(232,144,74,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">200 FT · 90 FT BURST</text>
               {/* 3 inch */}
-              <path d="M 110,620 Q 240,360 380,423" fill="none" stroke="#e8c84a" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
+              <path d="M 110,620 L 380,423" fill="none" stroke="#e8c84a" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
               <circle cx="380" cy="423" r="29" fill="none" stroke="#e8c84a" strokeWidth="1.2" opacity="0.45"/>
               <circle cx="380" cy="423" r="29" fill="rgba(232,200,74,0.07)"/>
               <g transform="translate(380,423)" filter="url(#glow1)">
@@ -179,7 +179,7 @@ export default function EventInfo() {
               <text x="404" y="420" fill="#e8c84a" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">3 in</text>
               <text x="404" y="432" fill="rgba(232,200,74,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">300 FT · 135 FT BURST</text>
               {/* 4 inch */}
-              <path d="M 110,620 Q 300,270 490,358" fill="none" stroke="#6aaa10" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
+              <path d="M 110,620 L 490,358" fill="none" stroke="#6aaa10" strokeWidth="2" strokeDasharray="7 5" opacity="0.9"/>
               <circle cx="490" cy="358" r="39" fill="none" stroke="#6aaa10" strokeWidth="1.2" opacity="0.4"/>
               <circle cx="490" cy="358" r="39" fill="rgba(106,170,16,0.06)"/>
               <g transform="translate(490,358)" filter="url(#glow1)">
@@ -194,7 +194,7 @@ export default function EventInfo() {
               <text x="520" y="355" fill="#6aaa10" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">4 in</text>
               <text x="520" y="367" fill="rgba(106,170,16,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">400 FT · 180 FT BURST</text>
               {/* 5 inch */}
-              <path d="M 110,620 Q 360,175 590,292" fill="none" stroke="#0a9a78" strokeWidth="2.2" strokeDasharray="7 5" opacity="0.9"/>
+              <path d="M 110,620 L 590,292" fill="none" stroke="#0a9a78" strokeWidth="2.2" strokeDasharray="7 5" opacity="0.9"/>
               <circle cx="590" cy="292" r="48" fill="none" stroke="#0a9a78" strokeWidth="1.2" opacity="0.38"/>
               <circle cx="590" cy="292" r="48" fill="rgba(10,154,120,0.06)"/>
               <g transform="translate(590,292)" filter="url(#glowStrong)">
@@ -209,7 +209,7 @@ export default function EventInfo() {
               <text x="625" y="289" fill="#0a9a78" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">5 in</text>
               <text x="625" y="301" fill="rgba(10,154,120,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">500 FT · 225 FT BURST</text>
               {/* 6 inch */}
-              <path d="M 110,620 Q 420,90 700,226" fill="none" stroke="#4ab4e8" strokeWidth="2.2" strokeDasharray="7 5" opacity="0.9"/>
+              <path d="M 110,620 L 700,226" fill="none" stroke="#4ab4e8" strokeWidth="2.2" strokeDasharray="7 5" opacity="0.9"/>
               <circle cx="700" cy="226" r="58" fill="none" stroke="#4ab4e8" strokeWidth="1.2" opacity="0.35"/>
               <circle cx="700" cy="226" r="58" fill="rgba(74,180,232,0.06)"/>
               <g transform="translate(700,226)" filter="url(#glowStrong)">
@@ -224,7 +224,7 @@ export default function EventInfo() {
               <text x="738" y="223" fill="#4ab4e8" fontSize="13" fontWeight="600" letterSpacing="1" fontFamily="'Barlow Condensed',sans-serif">6 in</text>
               <text x="738" y="235" fill="rgba(74,180,232,0.6)" fontSize="9" letterSpacing="0.5" fontFamily="'Barlow Condensed',sans-serif">600 FT · 270 FT BURST</text>
               {/* 8 inch */}
-              <path d="M 110,620 Q 490,30 820,95" fill="none" stroke="#1a3a7a" strokeWidth="2.5" strokeDasharray="9 5" opacity="0.95"/>
+              <path d="M 110,620 L 820,95" fill="none" stroke="#1a3a7a" strokeWidth="2.5" strokeDasharray="9 5" opacity="0.95"/>
               <circle cx="820" cy="95" r="77" fill="none" stroke="#1a3a7a" strokeWidth="1.3" opacity="0.3"/>
               <circle cx="820" cy="95" r="77" fill="rgba(26,58,122,0.05)"/>
               <g transform="translate(820,95)" filter="url(#glowStrong)">
@@ -241,7 +241,7 @@ export default function EventInfo() {
             </svg>
           </div>
 
-          <p className="flex-1 text-base text-left font-medium" style={{ color: "#0D1B4B" }}>
+          <p className="flex-1 text-base text-left font-bold" style={{ color: "#0D1B4B" }}>
             This year&rsquo;s show will include more than 2,000 shells and effects including monstrous 8 inch aerial shells!
           </p>
           </div>
