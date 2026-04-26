@@ -240,7 +240,7 @@ export default function EventInfo() {
           </div>
 
           <p className="flex-1 text-base text-left font-bold" style={{ color: "#0D1B4B" }}>
-            This year&rsquo;s show will include more than 2,000 shells and effects including monstrous 8 inch aerial shells!
+            This year&rsquo;s show will include more than 2,000 shells and effects including monstrous 8in aerial shells!
           </p>
           </div>
         </div>
